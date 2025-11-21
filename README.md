@@ -2,6 +2,8 @@
 
 A lightweight, browser-based terminal emulator that provides real time access to your system's shell. Built with Node.js, WebSockets, and xterm.js.
 
+https://github.com/user-attachments/assets/0d6999ec-bebf-4ecd-a686-ca611397007a
+
 ## Features
 
 - Cross-Platform Support: Automatically detects the operating system to launch the appropriate shell
