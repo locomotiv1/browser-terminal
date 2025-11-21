@@ -23,59 +23,9 @@
   </head>
   <body>
     <div id="terminal-container"></div>
-
-    <!-- Load scripts from node_modules served by Express -->
     <script src="node_modules/xterm/lib/xterm.js"></script>
     <script src="node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
 
-    <script>
-      // 1. Initialize xterm.js
-      const term = new Terminal({
-        cursorBlink: true,
-        fontFamily: '"Cascadia Code", "Fira Code", monospace',
-        fontSize: 14,
-        theme: {
-          background: "#1e1e1e",
-        },
-      });
-
-      const fitAddon = new FitAddon.FitAddon();
-      term.loadAddon(fitAddon);
-      term.open(document.getElementById("terminal-container"));
-      fitAddon.fit();
-
-      // 2. Connect to the WebSocket Server
-      // We connect to the same host that served this page
-      const protocol = location.protocol === "https:" ? "wss://" : "ws://";
-      const socket = new WebSocket(protocol + location.host);
-
-      socket.onopen = () => {
-        term.write("\r\n\x1b[32mConnected to backend terminal.\x1b[0m\r\n");
-      };
-
-      // 3. Browser -> Server (Keystrokes)
-      term.onData((data) => {
-        if (socket.readyState === WebSocket.OPEN) {
-          socket.send(data);
-        }
-      });
-
-      // 4. Server -> Browser (Shell Output)
-      socket.onmessage = (event) => {
-        // In xterm.js v5, write accepts string or Uint8Array
-        term.write(event.data);
-      };
-
-      socket.onclose = () => {
-        term.write("\r\n\x1b[31mConnection closed.\x1b[0m\r\n");
-      };
-
-      // Handle Resize
-      window.addEventListener("resize", () => {
-        fitAddon.fit();
-        // Note: In a full implementation, you would send a special JSON message
-        // to the server here to update ptyProcess.resize(cols, rows)
-      });
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
