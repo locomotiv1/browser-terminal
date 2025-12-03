@@ -1,4 +1,6 @@
 # Web Terminal Emulator
+<img width="670" height="350" alt="Screenshot_20251203_210212" src="https://github.com/user-attachments/assets/154fa85d-7e58-4b6b-a55e-d0c2f646c412" />
+
 
 A lightweight, browser-based terminal emulator that provides real time access to your system's shell. Built with Node.js, WebSockets, and xterm.js.
 
